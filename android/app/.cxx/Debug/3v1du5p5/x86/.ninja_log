@@ -1,0 +1,7 @@
+# ninja log v5
+3	574	7438945186901818	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	e5ed3ec0655717d3
+575	662	7438945187835319	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/Debug/3v1du5p5/obj/x86/libexample.so	78d4550f9f260f78
+2	532	7438948174163358	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	e5ed3ec0655717d3
+532	626	7438948175154358	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/Debug/3v1du5p5/obj/x86/libexample.so	e9dd796fa71a170
+3	549	7438949756681643	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	e5ed3ec0655717d3
+550	645	7438949757681274	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/Debug/3v1du5p5/obj/x86/libexample.so	e9dd796fa71a170
