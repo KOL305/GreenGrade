@@ -1,5 +1,5 @@
 # Sets the minimum version of CMake required to build the native library.
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.18)
 
 # Set the project name
 project(ffi_gmp_project)
