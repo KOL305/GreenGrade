@@ -1,7 +1,5 @@
 # ninja log v5
-2	525	7438945193481443	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	c2e45c3caffe6591
-525	618	7438945194453527	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/Debug/3v1du5p5/obj/x86_64/libexample.so	9ed8320246e1d6b
-2	495	7438948182832190	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	c2e45c3caffe6591
-496	588	7438948183799825	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/Debug/3v1du5p5/obj/x86_64/libexample.so	fd718fa6efb192d9
 2	518	7438949763299063	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	c2e45c3caffe6591
 519	610	7438949764248353	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/Debug/3v1du5p5/obj/x86_64/libexample.so	fd718fa6efb192d9
+3	1115	7449823470290369	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	c2e45c3caffe6591
+1115	1335	7449823472363788	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/Debug/3v1du5p5/obj/x86_64/libexample.so	fd718fa6efb192d9
