@@ -733,6 +733,32 @@ extern "C" int real() {
 
 }
 
+extern "C" void correctInputs(double* array){
+  BIintsConst = "";
+  ActualIntsConst ="";
+
+  for (int i = 1; i <= 30; i++) {
+    BIintsConst += std::to_string(array[i-1]) + " ";
+    if(i % 2 == 0){
+      BIintsConst += "\n";
+    }
+  }
+
+  ActualIntsConst += std::to_string(array[30]) + " ";
+  ActualIntsConst += std::to_string(array[31]);
+}
+
+
+
+// extern "C" const char* getBIintsConst(){
+//   static string store = BIintsConst; 
+//   return store.c_str();
+// }
+
+// extern "C" const  char* getActualIntsConst(){
+//   static string store = ActualIntsConst; 
+//   return store.c_str();
+// }
 
 
 extern "C" double getMin() {
