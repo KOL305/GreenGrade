@@ -89,7 +89,7 @@ string BIintsConst =
 "224.7121346	224.7121346\n"
 "1018.689105	1018.689105\n"
 "0.12	0.12\n"
-"78944	78944\n"
+"78944	101624\n"
 "1211691.763	1211691.763";
 
 string BIbreaksConst = 
@@ -121,15 +121,18 @@ void increaseRuntime(){
     }
   }
   int average;
-  if (counterBIints > 4){
-    for (int i = 0; i < BIints.size(); i++){
-      if (!(BIints[i][0] == BIints[i][1]) && i != 0 && i != 4 && i != 7 && i != 9 && i != 13){
+  //int countercounter = 15;
+
+    int i = 0; 
+    while (counterBIints > 2 && i <= 14){
+      if (!(BIints[i][0] == BIints[i][1]) && i != 0 && i != 4 ){
         average = (BIints[i][0] + BIints[i][1])/2;
         BIints[i][0] = average;
         BIints[i][1] = average;
+        counterBIints--;
       }
+      i++;
     }
-  }
 }
 
 void addSums(int arr[], int len, int x) {
@@ -750,15 +753,15 @@ extern "C" void correctInputs(double* array){
 
 
 
-extern "C" const char* getBIintsConst(){
-  static string store = BIintsConst; 
-  return store.c_str();
-}
+// extern "C" const char* getBIintsConst(){
+//   static string store = BIintsConst; 
+//   return store.c_str();
+// }
 
-extern "C" const  char* getActualIntsConst(){
-  static string store = ActualIntsConst; 
-  return store.c_str();
-}
+// extern "C" const  char* getActualIntsConst(){
+//   static string store = ActualIntsConst; 
+//   return store.c_str();
+// }
 
 
 extern "C" double getMin() {
