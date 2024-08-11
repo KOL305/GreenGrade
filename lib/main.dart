@@ -7,11 +7,49 @@ import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+
+
+import 'package:google_generative_ai/google_generative_ai.dart';
 typedef PrintArrayC = Void Function(Array<Double>, Int32);
 typedef PrintArrayDart = void Function(Array<Double>, int);
+// Access your API key as an environment variable (see "Set up your API key" above)
+const String apiKey = "AIzaSyCHqMM4qKAh-kDGL6Ty4bf2LR8PVS53CGM";
+
+void test() async {
+  // String  apiKey = String.fromEnvironment("API_KEY");
+  print(apiKey);
+  // Access your API key as an environment variable (see "Set up your API key" above)
+  if (apiKey == null) {
+      print('No \$API_KEY environment variable');
+      exit(1);
+  }
+  // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+  final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+  final content = [Content.text('Task: You are an expert in analyzing company sustainability reports. I have provided a sustainability report, and I need you to extract and estimate specific sustainability indicators. Follow the detailed instructions below: 1. Data Extraction: Objective: Extract the following sustainability indicators. For each indicator, provide both the minimum and maximum values: If an exact value is available, use it for both min and max. If the indicator is not explicitly stated, estimate a reasonable range based on the report\'s content or external sources such as company websites, industry averages, or financial databases. Ensure all values are in the correct units. If needed, convert units accordingly. Indicators List: Total Water Withdrawal (m³/year) Discharged Water (m³/year) Reused or Treated Water (% of total water withdrawal) Reduction in Freshwater Consumption (%/year) GHG Emissions (kg CO₂ equivalent/year) Air Emissions (metric tons/year) Reduction in GHG (%/year) Energy From Nonrenewable Sources (Joules/year) Energy From Renewable Sources (% of total energy) Total Waste Generated (metric tons/year) Waste Recycled (metric tons/year) Hazardous Waste (metric tons/year) Debt Ratio to Equity Median Salary (USD/year) Market Capitalization (USD) Fresh Water Consumption (m³/year) Number of employees 2. Output Format: Structure: Provide the results in a 1D array with min and max values for each indicator in the same order as listed above. Formatting: Enclose all values in quotes and separate them with commas. The array should be enclosed in square brackets []. Ensure all values are in numerical format without scientific notation. Remove commas or non-numeric characters from the values. The output must contain 34 values in total. Example Output: ["210.5", "210.5", "228.6", "228.6", "197.2", "214.5", "5", "10", "-11", "0", "15430", "16080", "0.02", "0.03", "-1", "4.4", "4.97", "9.41", "0", "100", "0.2", "0.22", "0.16", "0.18", "0.08", "0.09", "0.4", "0.8", "40000", "150000", "250000", "750000", "101010", "101010"] 3. Estimation Guidelines: Prioritization: Always prioritize data within the report for estimations. External Sources: If data is missing, search for information on the company’s website, reputable financial databases, or industry reports. Benchmarks: For market capitalization, use comparable publicly traded companies as benchmarks. You should only output the array. Do this for the company apple.')];
+  final response = await model.generateContent(content);
+  // print(response.text);
+}
+
+    
 
 
+// Future<void> fetchGeminiData() async {
+//   final response = await http.get(
+//     Uri.parse('https://api.gemini.com/v1/some-endpoint'),
+//     headers: {
+//       'X-Gemini-APIKey': apiKey,  // Pass your API key here
+//     },
+//   );
 
+//   if (response.statusCode == 200) {
+//     // Process the data
+//     print('Data: ${response.body}');
+//   } else {
+//     throw Exception('Failed to load data: ${response.statusCode}');
+//   }
+// }
 // class HomePage extends StatefulWidget {
 //   const HomePage({super.key});
 
@@ -49,73 +87,77 @@ typedef PrintArrayDart = void Function(Array<Double>, int);
 //   }
 // }
 
-void callCFunction() {
-  final DynamicLibrary nativeLib = Platform.isAndroid
-      ? DynamicLibrary.open('libexample.so')
-      : DynamicLibrary.process();
-// test array, u will have to use the one from gemini
-  final List<double> dartArray = 
-  [5932.772365,	5932.77236,
-  7673.782108,	7673.782108,
-  61.5,	61.5,
-  11.75942918,	11.75942918,
-  7670504.872,	7670504.872,
-  4609.911426,	4609.911426,
-  21.07362861,	21.07362861,
-  11248893000000,	11248893000000,
-  20.6,	20.6,
-  3222.763508,	3222.763508,
-  224.7121346,	224.7121346,
-  1018.689105,	1018.689105,
-  0.12,	0.12,
-  78944,	101624,
-  1211691.763,	1211691.763,
-  3333.215235, 3333.215235];
+// void callCFunction() {
+//   final DynamicLibrary nativeLib = Platform.isAndroid
+//       ? DynamicLibrary.open('libexample.so')
+//       : DynamicLibrary.process();
+// // test array, u will have to use the one from gemini
+// print("rannnd");
+//   final List<double> dartArray = 
+//   [5932.772365,	5932.77236,
+//   7673.782108,	7673.782108,
+//   61.5,	61.5,
+//   11.75942918,	11.75942918,
+//   7670504.872,	7670504.872,
+//   4609.911426,	4609.911426,
+//   21.07362861,	21.07362861,
+//   11248893000000,	11248893000000,
+//   20.6,	20.6,
+//   3222.763508,	3222.763508,
+//   224.7121346,	224.7121346,
+//   1018.689105,	1018.689105,
+//   0.12,	0.12,
+//   78944,	101624,
+//   1211691.763,	1211691.763,
+//   3333.215235, 3333.215235];
 
- // Allocate memory for the array in native memory
-    final Pointer<Double> nativeArray = malloc<Double>(dartArray.length);
+//  // Allocate memory for the array in native memory
+//     final Pointer<Double> nativeArray = malloc<Double>(dartArray.length);
 
-    // Copy Dart array to native memory
-    for (int i = 0; i < dartArray.length; i++) {
-      nativeArray[i] = dartArray[i];
-    }
-
-
-    // for (int i = 0; i < dartArray.length; i++) {
-    // print(nativeArray[i]);
-    // }
-
-    // tbh u cud skip this step if its already stored as a pointer, but use this if not
-
-  final setNumbers = nativeLib.lookupFunction<Void Function(Pointer<Double>), void Function(Pointer<Double>)>("correctInputs");
-
-  setNumbers(nativeArray);
-
-  // final getBIints = nativeLib.lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>("getBIintsConst");
-  // final getActual = nativeLib.lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>("getActualIntsConst");
-
-  // print(getBIints().toDartString());
-  // print("done with i ints");
-  // print(getActual().toDartString());
+//     // Copy Dart array to native memory
+//     for (int i = 0; i < dartArray.length; i++) {
+//       nativeArray[i] = dartArray[i];
+//     }
 
 
-  final real =
-      nativeLib.lookupFunction<Int32 Function(), int Function()>("real");
-  real();
+//     // for (int i = 0; i < dartArray.length; i++) {
+//     // print(nativeArray[i]);
+//     // }
 
-  final getMin =
-      nativeLib.lookupFunction<Double Function(), double Function()>("getMin");
+//     // tbh u cud skip this step if its already stored as a pointer, but use this if not
 
-  final getMax =
-      nativeLib.lookupFunction<Double Function(), double Function()>("getMax");
+//   final setNumbers = nativeLib.lookupFunction<Void Function(Pointer<Double>), void Function(Pointer<Double>)>("correctInputs");
 
-  print(getMin());
-  print(getMax());
-}
+//   setNumbers(nativeArray);
+
+//   // final getBIints = nativeLib.lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>("getBIintsConst");
+//   // final getActual = nativeLib.lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>("getActualIntsConst");
+
+//   // print(getBIints().toDartString());
+//   // print("done with i ints");
+//   // print(getActual().toDartString());
+
+
+//   final real =
+//       nativeLib.lookupFunction<Int32 Function(), int Function()>("real");
+//   real();
+
+//   final getMin =
+//       nativeLib.lookupFunction<Double Function(), double Function()>("getMin");
+
+//   final getMax =
+//       nativeLib.lookupFunction<Double Function(), double Function()>("getMax");
+
+//   print(getMin());
+//   print(getMax());
+// }
 
 
 
 void main() {
+  // print('API Key: $apiKey');
+  // fetchGeminiData();
+  test();
   runApp(MyApp());
 }
 
@@ -209,6 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _validateAndSubmit() {
+      print("running");
     // Helper function to check if max is less than min
     bool isValid = true;
     String errorMessage = '';
@@ -225,14 +268,14 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       return true;
     }
-    
+        print("running");
     bool checkEmpty(TextEditingController minController, TextEditingController maxController) {
       if(minController.text.isEmpty || maxController.text.isEmpty) {
         return false;
       }
       return true;
     }
-
+    print("running");
     // Validate each pair of min and max fields
     if (!checkMinMax(_totalWaterWithdrawalMinController, _totalWaterWithdrawalMaxController) ||
         !checkMinMax(_dischargedWaterMinController, _dischargedWaterMaxController) ||
@@ -281,7 +324,7 @@ class _MyHomePageState extends State<MyHomePage> {
         errorMessage = 'All fields must be populated.';
       });
     }
-
+    print("running");
     if (errorMessage.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -290,13 +333,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     }
+    
     else {
-      _setIndicatorVals();
+      setIndicatorVals();
       callCFunction();
       //navigate to sii finish page
     }
     //submission logic
-
+    print("running");
   
   }
 double minVal=-1;
@@ -305,18 +349,25 @@ double maxVal=-1;
 List<double> arrStringToDoub(List<String> arr) {
   List<double> returnArr = [];
   for(int i =0;i<arr.length;i++) {
-    returnArr[i]=double.parse(arr[i]);
+    returnArr.add(double.parse(arr[i]));
   }
   return returnArr;
 }
 
 void callCFunction() {
+
+  print("running");
   final DynamicLibrary nativeLib = Platform.isAndroid
       ? DynamicLibrary.open('libexample.so')
       : DynamicLibrary.process();
 // test array, u will have to use the one from gemini
-  
+
+
     List<double> doubleIndicatorVals = arrStringToDoub(indicatorVals);
+    
+
+    print(doubleIndicatorVals.length);
+    
  // Allocate memory for the array in native memory
     final Pointer<Double> nativeArray = malloc<Double>(doubleIndicatorVals.length);
 
@@ -330,7 +381,19 @@ void callCFunction() {
     // print(nativeArray[i]);
     // }
 
-    // tbh u cud skip this step if its already stored as a pointer, but use this if not
+    // tbh u cud skip this step if its already stored as a pointer, but use this if not\
+
+    for (int i = 0; i < doubleIndicatorVals.length; i++) {
+      print("real");
+      print(doubleIndicatorVals[i]);
+
+      print("string");
+      print(indicatorVals[i]);
+
+      print("native");
+      print(nativeArray[i]);
+    }
+
 
   final setNumbers = nativeLib.lookupFunction<Void Function(Pointer<Double>), void Function(Pointer<Double>)>("correctInputs");
 
@@ -355,9 +418,17 @@ void callCFunction() {
       nativeLib.lookupFunction<Double Function(), double Function()>("getMax");
   minVal=getMin();
   maxVal=getMax();
+  print("min");
   print(getMin());
+  print("max");
   print(getMax());
 }
+
+String text="";
+  Future<List<int>> _readDocumentData(String name) async {
+  final ByteData data = await rootBundle.load('assets/$name');
+  return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  }
 
 String? _fileName;
 String? _filePath;
@@ -377,6 +448,15 @@ String? _filePath;
     print(_fileName);
     print(_filePath);
 
+    File pdfFile = File(_filePath!);
+        List<int> bytes = await pdfFile.readAsBytes();
+        PdfDocument document = PdfDocument(inputBytes: bytes);
+  //Create a new instance of the PdfTextExtractor.
+  PdfTextExtractor extractor = PdfTextExtractor(document);
+
+  //Extract all the text from the document.
+  text = extractor.extractText();
+
       // You can access the file path using file.path
       // File fileToUpload = File(file.path!);
     } else {
@@ -384,46 +464,71 @@ String? _filePath;
     }
   }
   List<String> indicatorVals=[];
-  void _setIndicatorVals() async {
+
+     void setIndicatorVals() async {
     
     double numEmployees=(double.parse(_numberOfEmployeesMinController.text) + double.parse(_numberOfEmployeesMaxController.text))/2;
-    indicatorVals[0]= (double.parse(_totalWaterWithdrawalMinController.text)/numEmployees).toString();
-    indicatorVals[1]= (double.parse(_totalWaterWithdrawalMaxController.text)/numEmployees).toString();
-    indicatorVals[2]= (double.parse(_dischargedWaterMinController.text)/numEmployees).toString();
-    indicatorVals[3]= (double.parse(_dischargedWaterMaxController.text)/numEmployees).toString();
-    indicatorVals[4]=_reusedWaterMinController.text;
-    indicatorVals[5]=_reusedWaterMaxController.text;
-    indicatorVals[6]=_reductionFreshwaterMinController.text;
-    indicatorVals[7]=_reductionFreshwaterMaxController.text;
-    indicatorVals[8]= (double.parse(_ghgEmissionsMinController.text)/numEmployees).toString();
-    indicatorVals[9]= (double.parse(_ghgEmissionsMaxController.text)/numEmployees).toString();
-    indicatorVals[10]= (double.parse(_airEmissionsMinController.text)/numEmployees).toString();
-    indicatorVals[11]= (double.parse(_airEmissionsMaxController.text)/numEmployees).toString();
-    indicatorVals[12]=_reductionGhgMinController.text;
-    indicatorVals[13]=_reductionGhgMaxController.text;
-    indicatorVals[14]= (double.parse(_energyNonrenewableMinController.text)/numEmployees).toString();
-    indicatorVals[15]= (double.parse(_energyNonrenewableMaxController.text)/numEmployees).toString();
-    indicatorVals[16]=_energyRenewableMinController.text;
-    indicatorVals[17]=_energyRenewableMaxController.text;
-    indicatorVals[18]= (double.parse(_totalWasteGeneratedMinController.text)/numEmployees).toString();
-    indicatorVals[19]= (double.parse(_totalWasteGeneratedMaxController.text)/numEmployees).toString();
-    indicatorVals[20]= (double.parse(_wasteRecycledMinController.text)/numEmployees).toString();
-    indicatorVals[21]= (double.parse(_wasteRecycledMaxController.text)/numEmployees).toString();
-    indicatorVals[22]= (double.parse(_hazardousWasteMinController.text)/numEmployees).toString();
-    indicatorVals[23]= (double.parse(_hazardousWasteMaxController.text)/numEmployees).toString();
-    indicatorVals[24]=_debtEquityRatioMinController.text;
-    indicatorVals[25]=_debtEquityRatioMaxController.text;
-    indicatorVals[26]=_medianSalaryMinController.text;
-    indicatorVals[27]=_medianSalaryMaxController.text;
-    indicatorVals[28]= (double.parse(_marketCapMinController.text)/numEmployees).toString();
-    indicatorVals[29]= (double.parse(_marketCapMaxController.text)/numEmployees).toString();
-    indicatorVals[30]= (double.parse(_freshwaterConsumptionMinController.text)/numEmployees).toString();
-    indicatorVals[31]= (double.parse(_freshwaterConsumptionMaxController.text)/numEmployees).toString();
+    indicatorVals = [(double.parse(_totalWaterWithdrawalMinController.text)/numEmployees).toString(),
+    (double.parse(_totalWaterWithdrawalMaxController.text)/numEmployees).toString(),
+    (double.parse(_dischargedWaterMinController.text)/numEmployees).toString(),
+    (double.parse(_dischargedWaterMaxController.text)/numEmployees).toString(),
+    _reusedWaterMinController.text,
+    _reusedWaterMaxController.text,
+    _reductionFreshwaterMinController.text,
+    _reductionFreshwaterMaxController.text,
+    (double.parse(_ghgEmissionsMinController.text)/numEmployees).toString(),
+    (double.parse(_ghgEmissionsMaxController.text)/numEmployees).toString(),
+    (double.parse(_airEmissionsMinController.text)/numEmployees).toString(),
+    (double.parse(_airEmissionsMaxController.text)/numEmployees).toString(),
+    _reductionGhgMinController.text,
+    _reductionGhgMaxController.text,
+    (double.parse(_energyNonrenewableMinController.text)/numEmployees).toString(),
+    (double.parse(_energyNonrenewableMaxController.text)/numEmployees).toString(),
+    _energyRenewableMinController.text,
+    _energyRenewableMaxController.text,
+    (double.parse(_totalWasteGeneratedMinController.text)/numEmployees).toString(),
+    (double.parse(_totalWasteGeneratedMaxController.text)/numEmployees).toString(),
+    (double.parse(_wasteRecycledMinController.text)/numEmployees).toString(),
+    (double.parse(_wasteRecycledMaxController.text)/numEmployees).toString(),
+    (double.parse(_hazardousWasteMinController.text)/numEmployees).toString(),
+    (double.parse(_hazardousWasteMaxController.text)/numEmployees).toString(),
+    _debtEquityRatioMinController.text,
+    _debtEquityRatioMaxController.text,
+    _medianSalaryMinController.text,
+    _medianSalaryMaxController.text,
+    (double.parse(_marketCapMinController.text)/numEmployees).toString(),
+    (double.parse(_marketCapMaxController.text)/numEmployees).toString(),
+    (double.parse(_freshwaterConsumptionMinController.text)/numEmployees).toString(),
+    (double.parse(_freshwaterConsumptionMaxController.text)/numEmployees).toString()];
+
+    print("runningdd");
+
   }
-  void _findIndicatorVals() async {
-    //GEMINI STUFF (use _fileName)
-    List<String> indicators = ['234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234','234'];
-    _totalWaterWithdrawalMinController.text=indicators[0];
+ void _findIndicatorVals() async {
+    print("running");
+  if (apiKey == null) {
+      print('No \$API_KEY environment variable');
+      exit(1);
+  }
+  // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+  final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+  final content = [Content.text('Task: You are an expert in analyzing company sustainability reports. I have provided the text of a sustainability report, and I need you to extract and estimate specific sustainability indicators. Follow the detailed instructions below:\n\n1. Data Extraction:\nObjective: Extract the following sustainability indicators. For each indicator, provide both the minimum and maximum values:\nIf an exact value is available, use it for both min and max.\nIf the indicator is not explicitly stated, estimate a reasonable range based on the report\'s content or external sources such as company websites, industry averages, or financial databases.\nEnsure all values are in the correct units. If needed, convert units accordingly.\nIndicators List:\nTotal Water Withdrawal (mÂ³/year)\nDischarged Water (mÂ³/year)\nReused or Treated Water (% of total water withdrawal)\nReduction in Freshwater Consumption (%/year)\nGHG Emissions (kg COâ‚‚ equivalent/year)\nAir Emissions (metric tons/year)\nReduction in GHG (%/year)\nEnergy From Nonrenewable Sources (Joules/year)\nEnergy From Renewable Sources (% of total energy)\nTotal Waste Generated (metric tons/year)\nWaste Recycled (metric tons/year)\nHazardous Waste (metric tons/year)\nDebt Ratio to Equity\nMedian Salary (USD/year)\nMarket Capitalization (USD)\nFresh Water Consumption (mÂ³/year)\nNumber of employees\n2. Output Format:\nStructure: Provide the results in a 1D array with min and max values for each indicator in the same order as listed above.\nFormatting:\nEnclose all values in quotes and separate them with commas.\nThe array should be enclosed in square brackets [].\nEnsure all values are in numerical format without scientific notation.\nRemove commas or non-numeric characters from the values.\nThe output must contain 34 values in total.\nExample Output:\n["210.5", "210.5", "228.6", "228.6", "197.2", "214.5", "5", "10", "-11", "0", "15430", "16080", "0.02", "0.03", "-1", "4.4", "4.97", "9.41", "0", "100", "0.2", "0.22", "0.16", "0.18", "0.08", "0.09", "0.4", "0.8", "40000", "150000", "250000", "750000", "101010", "101010"]\n\n3. Estimation Guidelines:\nPrioritization: Always prioritize data within the report for estimations.\nExternal Sources: If data is missing, search for information on the companyâ€™s website, reputable financial databases, or industry reports.\nBenchmarks: For market capitalization, use comparable publicly traded companies as benchmarks.\n\nYou should only output the array. Make sure there are exactly 34 numbers, no more, no less. Only 34.\n\n'+text)];
+  var response = await model.generateContent(content);
+  while(response.text!.split('", "').length != 34){
+    response = await model.generateContent(content);
+  }
+  print(response.text);
+
+
+      List<String> indicators = response.text!.split('", "');
+      indicators[0]=indicators[0].substring(2);
+      print(indicators[33]);
+      String str=indicators[33];
+      str=str.split('"')[0];
+      indicators[33]=str;
+      print(str);
+      print(indicators[33]);
+        _totalWaterWithdrawalMinController.text=indicators[0];
     _totalWaterWithdrawalMaxController.text=indicators[1];
     _dischargedWaterMinController.text=indicators[2];
     _dischargedWaterMaxController.text=indicators[3];

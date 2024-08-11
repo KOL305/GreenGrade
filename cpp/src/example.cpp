@@ -89,7 +89,7 @@ string BIintsConst =
 "224.7121346	224.7121346\n"
 "1018.689105	1018.689105\n"
 "0.12	0.12\n"
-"78944	101624\n"
+"78944	78944\n"
 "1211691.763	1211691.763";
 
 string BIbreaksConst = 
@@ -750,15 +750,15 @@ extern "C" void correctInputs(double* array){
 
 
 
-// extern "C" const char* getBIintsConst(){
-//   static string store = BIintsConst; 
-//   return store.c_str();
-// }
+extern "C" const char* getBIintsConst(){
+  static string store = BIintsConst; 
+  return store.c_str();
+}
 
-// extern "C" const  char* getActualIntsConst(){
-//   static string store = ActualIntsConst; 
-//   return store.c_str();
-// }
+extern "C" const  char* getActualIntsConst(){
+  static string store = ActualIntsConst; 
+  return store.c_str();
+}
 
 
 extern "C" double getMin() {
