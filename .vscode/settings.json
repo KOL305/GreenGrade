@@ -5,6 +5,14 @@
         "iosfwd": "cpp",
         "format": "cpp",
         "xstring": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "cstddef": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp"
     }
 }

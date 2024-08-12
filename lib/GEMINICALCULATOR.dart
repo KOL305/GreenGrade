@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _validateAndSubmit() {
-    print("running");
+    // print("running");
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text("Processing..."),
@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return true;
     }
 
-    print("running");
+    // print("running");
     bool checkEmpty(TextEditingController minController,
         TextEditingController maxController) {
       if (minController.text.isEmpty || maxController.text.isEmpty) {
@@ -209,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return true;
     }
 
-    print("running");
+    // print("running");
     // Validate each pair of min and max fields
     if (!checkMinMax(_totalWaterWithdrawalMinController,
             _totalWaterWithdrawalMaxController) ||
@@ -280,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
         errorMessage = 'All fields must be populated.';
       });
     }
-    print("running");
+    // print("running");
     if (errorMessage.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -296,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //navigate to sii finish page
 
       //submission logic
-      print("running");
+      // print("running");
     }
   }
 
@@ -331,7 +331,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //List<double> doubleIndicatorVals = [];
   void callCFunction() {
-    print("running");
+    // print("running");
     final DynamicLibrary nativeLib = Platform.isAndroid
         ? DynamicLibrary.open('libexample.so')
         : DynamicLibrary.process();
@@ -339,7 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     List<double> doubleIndicatorVals = arrStringToDoub(indicatorVals);
 
-    print(doubleIndicatorVals.length);
+    // print(doubleIndicatorVals.length);
 
     // Allocate memory for the array in native memory
     Pointer<Double> nativeArray = malloc<Double>(doubleIndicatorVals.length);
@@ -362,8 +362,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // print("string");
       // print(indicatorVals[i]);
 
-      print("native");
-      print(nativeArray[i]);
+      // print("native");
+      // print(nativeArray[i]);
     }
 
     final setNumbers = nativeLib.lookupFunction<Void Function(Pointer<Double>),
@@ -373,12 +373,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final getBIints = nativeLib.lookupFunction<Pointer<Utf8> Function(),
         Pointer<Utf8> Function()>("getBIintsConst");
-    final getActual = nativeLib.lookupFunction<Pointer<Utf8> Function(),
-        Pointer<Utf8> Function()>("getActualIntsConst");
+    // final getActual = nativeLib.lookupFunction<Pointer<Utf8> Function(),
+    //     Pointer<Utf8> Function()>("getActualIntsConst");
 
     print(getBIints().toDartString());
     print("done with i ints");
-    print(getActual().toDartString());
+    // print(getActual().toDartString());
 
     final real =
         nativeLib.lookupFunction<Int32 Function(), int Function()>("real");
@@ -391,10 +391,10 @@ class _MyHomePageState extends State<MyHomePage> {
         .lookupFunction<Double Function(), double Function()>("getMax");
     minVal = getMin();
     maxVal = getMax();
-    print("min");
-    print(getMin());
-    print("max");
-    print(getMax());
+    // print("min");
+    // print(getMin());
+    // print("max");
+    // print(getMax());
 
     malloc.free(nativeArray);
   }

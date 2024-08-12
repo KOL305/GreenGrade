@@ -1,7 +1,6 @@
 # ninja log v5
-511	604	7438943804477389	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/RelWithDebInfo/4f6u5e33/obj/x86_64/libexample.so	5d17c84224e8ff69
-3	510	7438943803482914	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	cb8ea91306b3848b
-3	583	7438947879231814	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	cb8ea91306b3848b
-584	683	7438947880291753	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/RelWithDebInfo/4f6u5e33/obj/x86_64/libexample.so	2c67f26dd48518ec
 2	491	7438949435106478	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	cb8ea91306b3848b
 491	583	7438949436064168	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/RelWithDebInfo/4f6u5e33/obj/x86_64/libexample.so	2c67f26dd48518ec
+1	2362	7452041382544721	CMakeFiles/example.dir/C_/Users/kadon/Programming/ffi_gmp_project/cpp/src/example.cpp.o	cb8ea91306b3848b
+2363	2576	7452041384587159	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/RelWithDebInfo/4f6u5e33/obj/x86_64/libexample.so	2c67f26dd48518ec
+4	190	7452047375734567	C:/Users/kadon/Programming/ffi_gmp_project/build/app/intermediates/cxx/RelWithDebInfo/4f6u5e33/obj/x86_64/libexample.so	2c67f26dd48518ec

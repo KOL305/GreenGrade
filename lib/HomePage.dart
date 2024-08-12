@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  print("TO GEMINI calculator");
+                  // print("TO GEMINI calculator");
                   Navigator.pop(context); // Close drawer
                   Navigator.push(
                     context,
@@ -127,7 +127,7 @@ class HomePage extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                'This application was created by a group of high school students from UCLA COSMOS Cluster 4 with the goal of identifying quantitative sustainability ratings of companies. ',
+                'This application was created by a group of high school students with the goal of identifying quantitative sustainability ratings of companies. ',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,

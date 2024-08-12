@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'QRCodeCompressor.dart';
 import 'HomePage.dart';
-import 'SIIFORM.dart';
 import 'SIIGEMINI.dart';
 import 'GEMINICALCULATOR.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -14,7 +12,6 @@ class SIILandingPage extends StatefulWidget {
   @override
   State<SIILandingPage> createState() => SIILandingPageState();
 }
-  
 
 class SIILandingPageState extends State<SIILandingPage> {
   List<String> companies = []; // Track list of companies
@@ -124,7 +121,8 @@ class SIILandingPageState extends State<SIILandingPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => HomePage()),
-                  );;
+                  );
+                  ;
                 },
               ),
               ListTile(
@@ -151,7 +149,7 @@ class SIILandingPageState extends State<SIILandingPage> {
                 ),
                 onTap: () {
                   //print("TO GEMINI calculator");
-                   Navigator.pop(context); // Close drawer
+                  Navigator.pop(context); // Close drawer
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => GEMINICALCULATOR()),
@@ -173,7 +171,8 @@ class SIILandingPageState extends State<SIILandingPage> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0).copyWith(top: 0, bottom: 50.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0)
+              .copyWith(top: 0, bottom: 50.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -293,128 +292,156 @@ class SIILandingPageState extends State<SIILandingPage> {
                                           .toList(); // Get all keys from the box
                                       List entries =
                                           box.values.toList().reversed.toList();
-                                      
-                                      if (entries.isEmpty) { // Display placeholder if no entries
-                                      
-                                      return Center(
-                                       child: Container(
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [BoxShadow(
-                                          color: Colors.white,
-                                        offset: Offset(2, 2),)]
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => GEMINICALCULATOR()),
-                                          );
-                                          },
-                                        //                                              color: Colors.white,
-                                        // height: 180,
-                                        // width: 180,
-                                        child: Icon(
-                                        Icons.add,
-                                        color: Color(0xFF11221D),
-                                        size: 100,)
-                                        )));}
 
-                                       else { // Display list of entries if available
-                                      
-                                      return ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: entries.length,
-                                        itemBuilder: (context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              // Handle the tap event here
-                                              // Navigator.pop(
-                                              //     context); // Close the drawer
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SIIGEMINI(
-                                                          nameCompany: entries[index]["name"],
-                                                          min: entries[index]["siiMin"],
-                                                          max: entries[index]["siiMax"],
-                                                          analysisText: entries[index]["analysisT"]),
-                                                ),
-                                              );
-                                              print("Square $index tapped");
-                                            },
-                                            onLongPress: () {
-                                              _deleteCompany(keys[index]);
-                                            },
+                                      if (entries.isEmpty) {
+                                        // Display placeholder if no entries
+
+                                        return Center(
                                             child: Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  horizontal: 8),
-                                              width: 180,
-                                              height: 180, // Making it a square
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.1),
-                                                    blurRadius: 5,
-                                                    offset: Offset(2, 2),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.white,
+                                                        offset: Offset(2, 2),
+                                                      )
+                                                    ]),
+                                                child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                GEMINICALCULATOR()),
+                                                      );
+                                                    },
+                                                    //                                              color: Colors.white,
+                                                    // height: 180,
+                                                    // width: 180,
+                                                    child: Icon(
+                                                      Icons.add,
+                                                      color: Color(0xFF11221D),
+                                                      size: 100,
+                                                    ))));
+                                      } else {
+                                        // Display list of entries if available
+
+                                        return ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: entries.length,
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                                onTap: () {
+                                                  // Handle the tap event here
+                                                  // Navigator.pop(
+                                                  //     context); // Close the drawer
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SIIGEMINI(
+                                                              nameCompany:
+                                                                  entries[index]
+                                                                      ["name"],
+                                                              min: entries[
+                                                                      index]
+                                                                  ["siiMin"],
+                                                              max: entries[
+                                                                      index]
+                                                                  ["siiMax"],
+                                                              analysisText:
+                                                                  entries[index]
+                                                                      [
+                                                                      "analysisT"]),
+                                                    ),
+                                                  );
+                                                  print("Square $index tapped");
+                                                },
+                                                onLongPress: () {
+                                                  _deleteCompany(keys[index]);
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 8),
+                                                  width: 180,
+                                                  height:
+                                                      180, // Making it a square
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black
+                                                            .withOpacity(0.1),
+                                                        blurRadius: 5,
+                                                        offset: Offset(2, 2),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                              child: Padding(
-                                               padding: EdgeInsets.only(
-                                                top: 8.0,    // Less padding on the top
-                                                left: 16.0,  // Padding on the left
-                                                right: 16.0, // Padding on the right
-                                                bottom: 16.0 // Padding on the bottom
-                                              ),
-                                              child: Align(
-                                                alignment: Alignment.center,
-                                                child: Column(children: [
-                                                  SizedBox(height: 25),
-                                                  Text(
-                                                    entries[index]["name"], 
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top:
+                                                            8.0, // Less padding on the top
+                                                        left:
+                                                            16.0, // Padding on the left
+                                                        right:
+                                                            16.0, // Padding on the right
+                                                        bottom:
+                                                            16.0 // Padding on the bottom
+                                                        ),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Column(children: [
+                                                        SizedBox(height: 25),
+                                                        Text(
+                                                          entries[index]
+                                                              ["name"],
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: 15),
+                                                        Text(
+                                                          "SII Min: ${entries[index]["siiMin"]}",
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "SII Max: ${entries[index]["siiMax"]}",
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ]),
                                                     ),
                                                   ),
-                                                  SizedBox(height: 15),
-                                                  Text(
-                                                    "SII Min: ${entries[index]["siiMin"]}",
-                                                    overflow: TextOverflow.ellipsis,                                                    
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "SII Max: ${entries[index]["siiMax"]}",
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                ]),
-                                              ),
-                                            ),
-                                          ));
-                                        },
-                                      );
-                                    }}));
+                                                ));
+                                          },
+                                        );
+                                      }
+                                    }));
                             // Use the box her
-                            
                           } else {
                             // Show loading indicator or handle error
                             return CircularProgressIndicator();
@@ -438,14 +465,15 @@ class SIILandingPageState extends State<SIILandingPage> {
               SizedBox(height: 30),
               // Profile Creation Section
               Column(
-                children: [               
+                children: [
                   SizedBox(height: 16),
                   OutlinedButton(
                     onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => GEMINICALCULATOR()),
-                  );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GEMINICALCULATOR()),
+                      );
                     },
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(color: Colors.greenAccent, width: 2),
@@ -462,7 +490,8 @@ class SIILandingPageState extends State<SIILandingPage> {
                       ),
                     ),
                   ),
-                SizedBox(height:125)],
+                  SizedBox(height: 125)
+                ],
               ),
             ],
           ),

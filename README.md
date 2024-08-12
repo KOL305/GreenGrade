@@ -1,6 +1,6 @@
-# ffi_gmp_project
+# Green Grade
 
-A new Flutter project.
+Green Grade is an Android application that aims to inform users about 
 
 ## Getting Started
 

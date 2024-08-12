@@ -11,8 +11,6 @@
 #include <map>
 #include <sstream>
 
-
-
 #define LOG_TAG "ExampleFunction"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
@@ -92,6 +90,8 @@ string BIintsConst =
 "78944	101624\n"
 "1211691.763	1211691.763";
 
+
+
 string BIbreaksConst = 
 "0 0 337.8571429 3161.964286 0.2 1 1\n"
 "0 0 6.3162299482 14.21151738 0.2 1 1\n"
@@ -111,6 +111,8 @@ string BIbreaksConst =
 
 string ActualIntsConst = 
 "3333.215235 3333.215235";
+
+std::vector<string> BIlist;
 
 
 void increaseRuntime(){
@@ -573,7 +575,7 @@ extern "C" int real() {
 
 
   std::stringstream myfile1(BIbreaksConst);
-  std::stringstream myfile2(BIintsConst);
+  std::stringstream myfile2(BIlist.back());
   std::stringstream myfile3(ActualIntsConst);
 //   ifstream myfile1("cpp\\src\\ActualInts.txt");
 //   ifstream myfile2("cpp\\src\\BIints.txt");
@@ -740,6 +742,11 @@ extern "C" void correctInputs(double* array){
   BIintsConst = "";
   ActualIntsConst ="";
 
+  
+  LOGI("PRINTING AFPOIJEOFJAEPAIDPAFFAPOJFAPOEFPE");
+  LOGI("%s", BIintsConst.c_str());
+
+
   for (int i = 1; i <= 30; i++) {
     BIintsConst += std::to_string(array[i-1]) + " ";
     if(i % 2 == 0){
@@ -750,27 +757,37 @@ extern "C" void correctInputs(double* array){
   ActualIntsConst += std::to_string(array[30]) + " ";
   ActualIntsConst += std::to_string(array[31]);
 
-  LOGI("Printing ARRAY");
-  for (int i = 0; i < 32; i++) {
-      double value = array[i];
-      std::stringstream ss;
-      ss << value;
-      std::string valueString = ss.str();
-      LOGI("%s", valueString.c_str());
-  }
+  BIlist.push_back(BIintsConst);
+
+  LOGI("PRINTING BINTCONST");
+  LOGI("%s", BIintsConst.c_str());
+
+  
+  LOGI("PRINTING BILISTBACK");
+  LOGI("%s", BIlist.back().c_str());
+
+  // LOGI("Printing ARRAY");
+  // for (int i = 0; i < 32; i++) {
+  //     double value = array[i];
+  //     std::stringstream ss;
+  //     ss << value;
+  //     std::string valueString = ss.str();
+  //     LOGI("%s", valueString.c_str());
+  // }
       // double* value = array;
       // std::stringstream ss;
       // ss << value;
       // std::string valueString = ss.str();
       // LOGI("%s", valueString.c_str());
-  LOGI("Done Printing ARRAY");
+  // LOGI("Done Printing ARRAY");
+  // LOGI("%s", BIintsConst.c_str());
 
 }
 
 
 
 extern "C" const char* getBIintsConst(){
-  static string store = BIintsConst; 
+  static string store = BIlist.back(); 
   return store.c_str();
 }
 
@@ -781,18 +798,18 @@ extern "C" const  char* getActualIntsConst(){
 
 
 extern "C" double getMin() {
-  LOGI("AAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBB");
-  LOGI("PRINTING BIINTS");
-   for (int i = 0; i < BIints.size(); i++) {
-     for (int j = 0; j < BIints[i].size(); j++){
-       double value = BIints[i][j];
-       std::stringstream ss;
-       ss << value;
-       std::string valueString = ss.str();
-       LOGI("%s", valueString.c_str());
-     }
-     LOGI("Goodbye");
-   }
+  // LOGI("AAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBB");
+  // LOGI("PRINTING BIINTS");
+  //  for (int i = 0; i < BIints.size(); i++) {
+  //    for (int j = 0; j < BIints[i].size(); j++){
+  //      double value = BIints[i][j];
+  //      std::stringstream ss;
+  //      ss << value;
+  //      std::string valueString = ss.str();
+  //      LOGI("%s", valueString.c_str());
+  //    }
+  //    LOGI("Goodbye");
+  //  }
   // LOGI("Printing COMBOS");
   // for (int i = 0; i < combos.size(); i++) {
   //     double value = combos[i][0];
@@ -802,14 +819,14 @@ extern "C" double getMin() {
   //     LOGI("%s", valueString.c_str());
   // }
   
-  LOGI("All 0th values of combos have been printed");
+  // LOGI("All 0th values of combos have been printed");
   return combos[0][0];
 }
 
 
 
 extern "C" double getMax() {
-  LOGI ("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+  // LOGI ("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 //   for (int i = 0; i < combos.size(); i++) {
 //     for (int j = 0; j < combos[i].size(); j++){
 //       double value = combos[i][j];
