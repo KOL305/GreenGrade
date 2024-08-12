@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'SIILandingPage.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+
+const String apiKey = "AIzaSyCHqMM4qKAh-kDGL6Ty4bf2LR8PVS53CGM";
 
 class SIIGEMINI extends StatelessWidget {
-  final int index; // Assuming you want to pass the index
-  final Map<dynamic, dynamic> data;
+  final String nameCompany;
+  final double min;
+  final double max;
+  final String analysisText;
 
-  const SIIGEMINI({Key? key, required this.index, required this.data}) : super(key: key);
+  const SIIGEMINI({Key? key, required this.nameCompany, required this.min, required this.max, required this.analysisText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +95,7 @@ class SIIGEMINI extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              data["name"],
+                              nameCompany,
                               style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -99,7 +104,7 @@ class SIIGEMINI extends StatelessWidget {
                             ),
                             SizedBox(height: 8),
                             Text(
-                              '[${data["siiMin"]}, ${data["siiMax"]}]',
+                              '[${min}, ${max}]',
                               style: TextStyle(
                                 fontSize: 24,
                                 color: Colors.black,
@@ -114,8 +119,7 @@ class SIIGEMINI extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: SingleChildScrollView(
                             child: Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. This report was created by Google\'s Gemini API. '
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. This report was created by Google\'s Gemini API.',
+                              analysisText,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.black,

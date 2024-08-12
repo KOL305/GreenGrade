@@ -242,11 +242,11 @@ class _SIIFORMState extends State<SIIFORM> {
                   ),
                 ),
                 onTap: () {
-                 Navigator.pop(context); // Close the drawer
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => SIILandingPage(title: "SII Landing Page")),
-                  );
+                //  Navigator.pop(context); // Close the drawer
+                //   Navigator.pushReplacement(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => SIILandingPage(title: "SII Landing Page")),
+                //   );
                 },
               ),
               // Gemini Index Generator option (now 3rd)
