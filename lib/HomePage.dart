@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'QRCodeCompressor.dart'; // Import the QR Code Compressor file
-import 'SIILandingPage.dart'; // Import the SII Landing Page file
+import 'SIILandingPage.dart';
 import 'GEMINICALCULATOR.dart';
 
 class HomePage extends StatelessWidget {
@@ -45,7 +44,7 @@ class HomePage extends StatelessWidget {
               ),
               ListTile(
                 title: Text(
-                  'Sustainability Interval Calculator',
+                  'Sustainability Interval Company View',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -56,7 +55,10 @@ class HomePage extends StatelessWidget {
                   Navigator.pop(context); // Close drawer
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(
+                        builder: (context) => SIILandingPage(
+                              title: 'Sustainability Interval Index',
+                            )),
                   );
                 },
               ),
@@ -71,7 +73,7 @@ class HomePage extends StatelessWidget {
                 ),
                 onTap: () {
                   print("TO GEMINI calculator");
-                   Navigator.pop(context); // Close drawer
+                  Navigator.pop(context); // Close drawer
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => GEMINICALCULATOR()),
@@ -137,6 +139,12 @@ class HomePage extends StatelessWidget {
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        offset: Offset(2, 2),
+                      )
+                    ],
                     gradient: LinearGradient(
                       colors: [Color(0xFFFFFFFF), Color(0xFF62ffac)],
                       begin: Alignment.topCenter,
@@ -182,38 +190,39 @@ class HomePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SIILandingPage(title: 'Sustainability Interval Index')),
+                          MaterialPageRoute(
+                              builder: (context) => SIILandingPage(
+                                  title: 'Sustainability Interval Index')),
                         );
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: Color(0xFF62ffac)),
                         minimumSize: Size(250, 60),
-                        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 24.0),
                       ),
-                      child: Text(
-                        'Sustainability Calculator',
-                        style: TextStyle(color: Color(0xFF62ffac), 
-                        fontSize: 20)
-                      ),
+                      child: Text('Company View',
+                          style: TextStyle(
+                              color: Color(0xFF62ffac), fontSize: 20)),
                     ),
                     SizedBox(height: 20),
                     OutlinedButton(
                       onPressed: () {
-                       Navigator.push(
+                        Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => GEMINICALCULATOR()),
+                          MaterialPageRoute(
+                              builder: (context) => GEMINICALCULATOR()),
                         );
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: Color(0xFF62ffac)),
                         minimumSize: Size(250, 60),
-                        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 24.0),
                       ),
-                      child: Text(
-                        'Gemini Index Generator',
-                        style: TextStyle(color: Color(0xFF62ffac), 
-                        fontSize: 20)
-                      ),
+                      child: Text('Gemini Index Generator',
+                          style: TextStyle(
+                              color: Color(0xFF62ffac), fontSize: 20)),
                     ),
                   ],
                 ),

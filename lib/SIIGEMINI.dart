@@ -17,7 +17,6 @@ class SIIGEMINI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SIIGEMINI Page'),
         backgroundColor: Color(0xFF11221D),
       ),
       body: Container(
@@ -138,7 +137,7 @@ class SIIGEMINI extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SIILandingPage(
-                                  title: 'Sustainability Interval Index',
+                                  title: 'Sustainability Interval Company View',
                                 ),
                               ),
                             );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'HomePage.dart'; // Import the HomePage file
+import 'HomePage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -19,12 +19,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App Name',
+      title: 'Gemini SII App',
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(), // Set HomePage as the home
+      home: HomePage(),
     );
   }
 }

@@ -13,22 +13,8 @@ class SIILandingPage extends StatefulWidget {
 
   @override
   State<SIILandingPage> createState() => SIILandingPageState();
-  
-  Widget _buildPlaceholder() {
-    return Center(
-      child: Container(
-        color: Colors.white,
-        height: 180,
-        width: 180,
-        child: Icon(
-          Icons.add,
-          color: Colors.greenAccent,
-          size: 100,
-        ),
-      ),
-    );
-  }
 }
+  
 
 class SIILandingPageState extends State<SIILandingPage> {
   List<String> companies = []; // Track list of companies
@@ -99,12 +85,6 @@ class SIILandingPageState extends State<SIILandingPage> {
   }
 
   @override
-  void dispose() {
-    Hive.close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -149,7 +129,7 @@ class SIILandingPageState extends State<SIILandingPage> {
               ),
               ListTile(
                 title: Text(
-                  'Sustainability Interval Calculator',
+                  'Sustainability Interval Company View',
                   style: TextStyle(
                     color: Color(0xFF62ffac),
                     fontSize: 24,
@@ -183,15 +163,17 @@ class SIILandingPageState extends State<SIILandingPage> {
         ),
       ),
       body: Container(
+        constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF11221D), Color(0xFF000000)],
+            stops: [0.2, 1.0],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0).copyWith(top: 0, bottom: 50.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -206,7 +188,7 @@ class SIILandingPageState extends State<SIILandingPage> {
                       color: Colors.greenAccent,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  SizedBox(width: 4),
                   Column(
                     children: [
                       Text(
@@ -218,10 +200,10 @@ class SIILandingPageState extends State<SIILandingPage> {
                         ),
                       ),
                       Text(
-                        'Index Calculator',
+                        'Company View',
                         style: TextStyle(
                           color: Colors.greenAccent,
-                          fontSize: 32,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -241,7 +223,7 @@ class SIILandingPageState extends State<SIILandingPage> {
               Column(
                 children: [
                   Text(
-                    'Upload sustainability indicator values you have.',
+                    "View previously uploaded companies.",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -251,7 +233,7 @@ class SIILandingPageState extends State<SIILandingPage> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Or upload a sustainability report for Gemini to extract SI values for you.',
+                    "Click on a tile to see a detailed breakdown from Gemini of a company's sustainbility metrics.",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -311,6 +293,34 @@ class SIILandingPageState extends State<SIILandingPage> {
                                           .toList(); // Get all keys from the box
                                       List entries =
                                           box.values.toList().reversed.toList();
+                                      
+                                      if (entries.isEmpty) { // Display placeholder if no entries
+                                      
+                                      return Center(
+                                       child: Container(
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [BoxShadow(
+                                          color: Colors.white,
+                                        offset: Offset(2, 2),)]
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => GEMINICALCULATOR()),
+                                          );
+                                          },
+                                        //                                              color: Colors.white,
+                                        // height: 180,
+                                        // width: 180,
+                                        child: Icon(
+                                        Icons.add,
+                                        color: Color(0xFF11221D),
+                                        size: 100,)
+                                        )));}
+
+                                       else { // Display list of entries if available
+                                      
                                       return ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemCount: entries.length,
@@ -354,7 +364,13 @@ class SIILandingPageState extends State<SIILandingPage> {
                                                   ),
                                                 ],
                                               ),
-
+                                              child: Padding(
+                                               padding: EdgeInsets.only(
+                                                top: 8.0,    // Less padding on the top
+                                                left: 16.0,  // Padding on the left
+                                                right: 16.0, // Padding on the right
+                                                bottom: 16.0 // Padding on the bottom
+                                              ),
                                               child: Align(
                                                 alignment: Alignment.center,
                                                 child: Column(children: [
@@ -372,6 +388,7 @@ class SIILandingPageState extends State<SIILandingPage> {
                                                   SizedBox(height: 15),
                                                   Text(
                                                     "SII Min: ${entries[index]["siiMin"]}",
+                                                    overflow: TextOverflow.ellipsis,                                                    
                                                     style: TextStyle(
                                                       fontSize: 20,
                                                       fontWeight:
@@ -381,6 +398,7 @@ class SIILandingPageState extends State<SIILandingPage> {
                                                   ),
                                                   Text(
                                                     "SII Max: ${entries[index]["siiMax"]}",
+                                                    overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontSize: 20,
                                                       fontWeight:
@@ -391,11 +409,12 @@ class SIILandingPageState extends State<SIILandingPage> {
                                                 ]),
                                               ),
                                             ),
-                                          );
+                                          ));
                                         },
                                       );
-                                    }));
+                                    }}));
                             // Use the box her
+                            
                           } else {
                             // Show loading indicator or handle error
                             return CircularProgressIndicator();
@@ -416,46 +435,10 @@ class SIILandingPageState extends State<SIILandingPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 24),
+              SizedBox(height: 30),
               // Profile Creation Section
               Column(
-                children: [
-                  Text(
-                    'Create a new profile:',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Upload Indicators',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'or',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Use Google’s Gemini to generate company indicators:',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                children: [               
                   SizedBox(height: 16),
                   OutlinedButton(
                     onPressed: () {
@@ -468,17 +451,18 @@ class SIILandingPageState extends State<SIILandingPage> {
                       side: BorderSide(color: Colors.greenAccent, width: 2),
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      minimumSize: Size(250, 60),
                     ),
                     child: Text(
                       'Add Company',
                       style: TextStyle(
                         color: Colors.greenAccent,
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                ],
+                SizedBox(height:125)],
               ),
             ],
           ),
