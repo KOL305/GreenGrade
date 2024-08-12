@@ -44,6 +44,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override void initState() {
+    Hive.openBox('SII');
+    super.initState();
+  }
+
   // Define controllers for each text field
   final TextEditingController nameController = TextEditingController();
   final TextEditingController _totalWaterWithdrawalMinController =
@@ -157,7 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
 bool isNameEmpty=true;
 
   void _addCompany() async {
-    Hive.openBox('SII');
     var box = Hive.box('SII');
     int timestamp = DateTime.now().millisecondsSinceEpoch;
     String key = timestamp.toString(); // Use the current length as the new key
@@ -353,11 +358,11 @@ bool isNameEmpty=true;
     // tbh u cud skip this step if its already stored as a pointer, but use this if not\
 
     for (int i = 0; i < doubleIndicatorVals.length; i++) {
-      print("real");
-      print(doubleIndicatorVals[i]);
+      // print("real");
+      // print(doubleIndicatorVals[i]);
 
-      print("string");
-      print(indicatorVals[i]);
+      // print("string");
+      // print(indicatorVals[i]);
 
       print("native");
       print(nativeArray[i]);

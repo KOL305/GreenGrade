@@ -765,10 +765,45 @@ extern "C" void correctInputs(double* array){
 
 
 extern "C" double getMin() {
+  LOGI("AAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBB");
+  LOGI("PRINTING BIINTS");
+   for (int i = 0; i < BIints.size(); i++) {
+     for (int j = 0; j < BIints[i].size(); j++){
+       double value = BIints[i][j];
+       std::stringstream ss;
+       ss << value;
+       std::string valueString = ss.str();
+       LOGI("%s", valueString.c_str());
+     }
+     LOGI("Goodbye");
+   }
+  // LOGI("Printing COMBOS");
+  // for (int i = 0; i < combos.size(); i++) {
+  //     double value = combos[i][0];
+  //     std::stringstream ss;
+  //     ss << value;
+  //     std::string valueString = ss.str();
+  //     LOGI("%s", valueString.c_str());
+  // }
+  
+  LOGI("All 0th values of combos have been printed");
   return combos[0][0];
 }
 
+
+
 extern "C" double getMax() {
+  LOGI ("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+//   for (int i = 0; i < combos.size(); i++) {
+//     for (int j = 0; j < combos[i].size(); j++){
+//       double value = combos[i][j];
+//       std::stringstream ss;
+//       ss << value;
+//       std::string valueString = ss.str();
+// //     LOGI("Calculation result: %s", result_str);
+//       LOGI("%s", valueString.c_str());
+//     }
+//     LOGI("Goodbye");
+//   }
   return combos[combos.size()-1][0];
 }
-
