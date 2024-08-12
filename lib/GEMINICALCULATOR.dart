@@ -390,6 +390,8 @@ bool isNameEmpty=true;
     print(getMin());
     print("max");
     print(getMax());
+
+    malloc.free(nativeArray);
   }
 
   String text = "";
