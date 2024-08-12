@@ -20,17 +20,17 @@ Debt to equity ratio
 Salary
 Market Cap per employee
 
-## Getting Started
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-Download this project, open it in Visual Studio Code, and then run it on an emulator. 
-
-Led by Ioannis Manusiouthakis.
+# Project Contributors
+Led by Ioannis Manousiouthakis
+- Kadon Liang
+- Kairui Sun
+- Shrish Premkrishna
+- Vikram Atmuri
+- Nishant Jonnalagadda
+- Sumedh Kothari
+- Shannon Xiao
+- Ryan Geng
+- Evan Choe
+- Jaden Li
+- Ansh Sankhala
+- et. al.
