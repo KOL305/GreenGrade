@@ -571,11 +571,75 @@ void nestedLoops(int length){
   }
 }
 
+tuple<string, string> correctInputs(double* array){
+  BIintsConst = "";
+  ActualIntsConst ="";
+
+  
+  LOGI("PRINTING AFPOIJEOFJAEPAIDPAFFAPOJFAPOEFPE");
+  LOGI("%s", BIintsConst.c_str());
+
+
+  for (int i = 1; i <= 30; i++) {
+    BIintsConst += std::to_string(array[i-1]) + " ";
+    if(i % 2 == 0){
+      BIintsConst += "\n";
+    }
+  }
+
+  ActualIntsConst += std::to_string(array[30]) + " ";
+  ActualIntsConst += std::to_string(array[31]);
+
+  BIlist.push_back(BIintsConst);
+
+  LOGI("PRINTING BINTCONST");
+  LOGI("%s", BIintsConst.c_str());
+
+  
+  LOGI("PRINTING BILISTBACK");
+  LOGI("%s", BIlist.back().c_str());
+
+  return make_tuple(BIintsConst, ActualIntsConst);
+
+  // LOGI("Printing ARRAY");
+  // for (int i = 0; i < 32; i++) {
+  //     double value = array[i];
+  //     std::stringstream ss;
+  //     ss << value;
+  //     std::string valueString = ss.str();
+  //     LOGI("%s", valueString.c_str());
+  // }
+      // double* value = array;
+      // std::stringstream ss;
+      // ss << value;
+      // std::string valueString = ss.str();
+      // LOGI("%s", valueString.c_str());
+  // LOGI("Done Printing ARRAY");
+  // LOGI("%s", BIintsConst.c_str());
+
+}
+
+
+
 
 extern "C" int real(double* array) {
   auto vals = correctInputs(array);
   string bival = get<0>(vals);
   string actval = get<1>(vals);
+  combos.clear();
+  BIbreaks.clear();
+  BIints.clear();
+  ActualInts.clear();
+  variables.clear();
+  xebs.clear();
+  newXebs.clear();
+  mu0grades.clear();
+  mu1s.clear();
+  combosRow.clear();
+  xebsIteration.clear();
+  rs.clear();
+  LOGI("real values");
+  LOGI("%s", bival.c_str());
 
   std::stringstream myfile1(BIbreaksConst);
   std::stringstream myfile2(bival);
@@ -738,54 +802,6 @@ extern "C" int real(double* array) {
 
  return 1;
 
-
-}
-
-tuple<string, string> correctInputs(double* array){
-  BIintsConst = "";
-  ActualIntsConst ="";
-
-  
-  LOGI("PRINTING AFPOIJEOFJAEPAIDPAFFAPOJFAPOEFPE");
-  LOGI("%s", BIintsConst.c_str());
-
-
-  for (int i = 1; i <= 30; i++) {
-    BIintsConst += std::to_string(array[i-1]) + " ";
-    if(i % 2 == 0){
-      BIintsConst += "\n";
-    }
-  }
-
-  ActualIntsConst += std::to_string(array[30]) + " ";
-  ActualIntsConst += std::to_string(array[31]);
-
-  BIlist.push_back(BIintsConst);
-
-  LOGI("PRINTING BINTCONST");
-  LOGI("%s", BIintsConst.c_str());
-
-  
-  LOGI("PRINTING BILISTBACK");
-  LOGI("%s", BIlist.back().c_str());
-
-  return make_tuple(BIintsConst, ActualIntsConst);
-
-  // LOGI("Printing ARRAY");
-  // for (int i = 0; i < 32; i++) {
-  //     double value = array[i];
-  //     std::stringstream ss;
-  //     ss << value;
-  //     std::string valueString = ss.str();
-  //     LOGI("%s", valueString.c_str());
-  // }
-      // double* value = array;
-      // std::stringstream ss;
-      // ss << value;
-      // std::string valueString = ss.str();
-      // LOGI("%s", valueString.c_str());
-  // LOGI("Done Printing ARRAY");
-  // LOGI("%s", BIintsConst.c_str());
 
 }
 

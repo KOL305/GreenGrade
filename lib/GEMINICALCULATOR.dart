@@ -366,24 +366,22 @@ class _MyHomePageState extends State<MyHomePage> {
       // print(nativeArray[i]);
     }
 
-    final setNumbers = nativeLib.lookupFunction<Void Function(Pointer<Double>),
-        void Function(Pointer<Double>)>("correctInputs");
+    // final setNumbers = nativeLib.lookupFunction<Void Function(Pointer<Double>),
+    //     void Function(Pointer<Double>)>("correctInputs");
 
-    setNumbers(nativeArray);
+    // setNumbers(nativeArray);
 
-    final getBIints = nativeLib.lookupFunction<Pointer<Utf8> Function(),
-        Pointer<Utf8> Function()>("getBIintsConst");
+    // final getBIints = nativeLib.lookupFunction<Pointer<Utf8> Function(),
+    //     Pointer<Utf8> Function()>("getBIintsConst");
     // final getActual = nativeLib.lookupFunction<Pointer<Utf8> Function(),
     //     Pointer<Utf8> Function()>("getActualIntsConst");
 
-    print(getBIints().toDartString());
-    print("done with i ints");
+    // print(getBIints().toDartString());
+    // print("done with i ints");
     // print(getActual().toDartString());
-
     final real =
-        nativeLib.lookupFunction<Int32 Function(), int Function()>("real");
-    real();
-
+        nativeLib.lookupFunction<Int32 Function(Pointer<Double>), int Function(Pointer<Double>)>("real");
+    real(nativeArray);
     final getMin = nativeLib
         .lookupFunction<Double Function(), double Function()>("getMin");
 
