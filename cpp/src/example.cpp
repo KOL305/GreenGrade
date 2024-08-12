@@ -124,7 +124,7 @@ void increaseRuntime(){
   //int countercounter = 15;
 
     int i = 0; 
-    while (counterBIints > 2 && i <= 14){
+    while (counterBIints > 1 && i <= 14){
       if (!(BIints[i][0] == BIints[i][1]) && i != 0 && i != 4 ){
         average = (BIints[i][0] + BIints[i][1])/2;
         BIints[i][0] = average;
@@ -749,19 +749,35 @@ extern "C" void correctInputs(double* array){
 
   ActualIntsConst += std::to_string(array[30]) + " ";
   ActualIntsConst += std::to_string(array[31]);
+
+  LOGI("Printing ARRAY");
+  for (int i = 0; i < 32; i++) {
+      double value = array[i];
+      std::stringstream ss;
+      ss << value;
+      std::string valueString = ss.str();
+      LOGI("%s", valueString.c_str());
+  }
+      // double* value = array;
+      // std::stringstream ss;
+      // ss << value;
+      // std::string valueString = ss.str();
+      // LOGI("%s", valueString.c_str());
+  LOGI("Done Printing ARRAY");
+
 }
 
 
 
-// extern "C" const char* getBIintsConst(){
-//   static string store = BIintsConst; 
-//   return store.c_str();
-// }
+extern "C" const char* getBIintsConst(){
+  static string store = BIintsConst; 
+  return store.c_str();
+}
 
-// extern "C" const  char* getActualIntsConst(){
-//   static string store = ActualIntsConst; 
-//   return store.c_str();
-// }
+extern "C" const  char* getActualIntsConst(){
+  static string store = ActualIntsConst; 
+  return store.c_str();
+}
 
 
 extern "C" double getMin() {
@@ -805,5 +821,7 @@ extern "C" double getMax() {
 //     }
 //     LOGI("Goodbye");
 //   }
+// BIints.clear();
+// ActualInts.clear();
   return combos[combos.size()-1][0];
 }

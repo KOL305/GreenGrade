@@ -44,8 +44,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  @override void initState() {
+  @override
+  void initState() {
     Hive.openBox('SII');
     super.initState();
   }
@@ -156,11 +156,10 @@ class _MyHomePageState extends State<MyHomePage> {
     _numberOfEmployeesMaxController.clear();
   }
 
-
   double minVal = -1;
   double maxVal = -1;
   String analysisT = "";
-bool isNameEmpty=true;
+  bool isNameEmpty = true;
 
   void _addCompany() async {
     var box = Hive.box('SII');
@@ -177,11 +176,11 @@ bool isNameEmpty=true;
   void _validateAndSubmit() {
     print("running");
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Processing..."),
-          backgroundColor: Colors.blue,
-        ),
-      );
+      SnackBar(
+        content: Text("Processing..."),
+        backgroundColor: Colors.blue,
+      ),
+    );
     // Helper function to check if max is less than min
     bool isValid = true;
     String errorMessage = '';
@@ -343,8 +342,7 @@ bool isNameEmpty=true;
     print(doubleIndicatorVals.length);
 
     // Allocate memory for the array in native memory
-    final Pointer<Double> nativeArray =
-        malloc<Double>(doubleIndicatorVals.length);
+    Pointer<Double> nativeArray = malloc<Double>(doubleIndicatorVals.length);
 
     // Copy Dart array to native memory
     for (int i = 0; i < doubleIndicatorVals.length; i++) {
@@ -373,12 +371,14 @@ bool isNameEmpty=true;
 
     setNumbers(nativeArray);
 
-    // final getBIints = nativeLib.lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>("getBIintsConst");
-    // final getActual = nativeLib.lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>("getActualIntsConst");
+    final getBIints = nativeLib.lookupFunction<Pointer<Utf8> Function(),
+        Pointer<Utf8> Function()>("getBIintsConst");
+    final getActual = nativeLib.lookupFunction<Pointer<Utf8> Function(),
+        Pointer<Utf8> Function()>("getActualIntsConst");
 
-    // print(getBIints().toDartString());
-    // print("done with i ints");
-    // print(getActual().toDartString());
+    print(getBIints().toDartString());
+    print("done with i ints");
+    print(getActual().toDartString());
 
     final real =
         nativeLib.lookupFunction<Int32 Function(), int Function()>("real");
@@ -428,7 +428,6 @@ bool isNameEmpty=true;
       });
       print(_fileName);
       print(_filePath);
-      
 
       File pdfFile = File(_filePath!);
       List<int> bytes = await pdfFile.readAsBytes();
@@ -510,25 +509,25 @@ bool isNameEmpty=true;
     print("runningdd");
   }
 
-  void setValidator(valid){
+  void setValidator(valid) {
     setState(() {
       isNameEmpty = valid;
     });
   }
+
   void _findIndicatorVals() async {
-    if(nameController.text=='') {
+    if (nameController.text == '') {
       setValidator(false);
       return;
-    }
-    else {
+    } else {
       setValidator(true);
     }
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Finding Values..."),
-          backgroundColor: Colors.blue,
-        ),
-      );
+      SnackBar(
+        content: Text("Finding Values..."),
+        backgroundColor: Colors.blue,
+      ),
+    );
     print("running");
     if (apiKey == null) {
       print('No \$API_KEY environment variable');
@@ -537,7 +536,7 @@ bool isNameEmpty=true;
     // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
     final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
 
-    String company=nameController.text;
+    String company = nameController.text;
     final content = [
       Content.text(
           'Task: You are an expert in analyzing company sustainability reports. Your task is to find certain sustainability data for the company $company. I have provided a sustainability report, and you must extract and estimate specific sustainability indicators from the report and the Internet. Follow the detailed instructions below: 1. Data Extraction: Objective: Extract the following sustainability indicators. For each indicator, provide both the minimum and maximum values: If an exact value is available, use it for both min and max. If the indicator is not explicitly stated, estimate a reasonable range based on the report and other sources on the Internet as well as as company websites, industry averages, or financial databases. If the company is in the United states, use https://www.sec.gov/edgar/search/ to source financial information. Ensure all values are in the correct units. If needed, convert units accordingly. For market cap, look at stock exchanges exclusively as these will be most accurate. Indicators List: Total Water Withdrawal (m³/year) Discharged Water (m³/year) Reused or Treated Water (% of total water withdrawal) Reduction in Freshwater Consumption (%/year) GHG Emissions (kg CO₂ equivalent/year) Air Emissions (metric tons/year) Reduction in GHG (%/year) Energy From Nonrenewable Sources (Joules/year) Energy From Renewable Sources (% of total energy) Total Waste Generated (metric tons/year) Waste Recycled (metric tons/year) Hazardous Waste (metric tons/year) Debt Ratio to Equity Median Salary (USD/year) Market Capitalization (USD) Fresh Water Consumption (m³/year) Number of employees 2. Output Format: Structure: Provide the results in a 1D array with min and max values for each indicator in the same order as listed above. Formatting: Enclose all values in quotes and separate them with commas. The array should be enclosed in square brackets []. Ensure all values are in numerical format without scientific notation. Remove commas and other .on-numeric characters from the values The output must contain 34 values in total. Example Output (DO NOT COPY THIS): ["210.5", "210.5", "228.6", "228.6", "197.2", "214.5", "5", "1", "-11", "0", "15430", "16080", "0.02", "0.03", "-1", "4.4", "4.97", "9.41", "0", "100", "0.2", "0.22", "0.16", "0.18", "0.08", "0.09", "0.4", "0.8", "40000", "150000", "250000", "750000", "101010", "101010e"] 3. Estimation Guidelines: Prioritization: Always prioritize data within the report for estimations. External Sources: If data is missing, search for information on the Internet. This could be the company’s website, reputable financial databases, or industry reports. Benchmarks: For market capitalization, use comparable publicly traded companies as benchmarks. You should only output the array. Do this for the company apple.')
@@ -592,7 +591,6 @@ bool isNameEmpty=true;
     _numberOfEmployeesMinController.text = indicators[32];
     _numberOfEmployeesMaxController.text = indicators[33];
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -743,11 +741,10 @@ bool isNameEmpty=true;
                             )),
                       ),
                       SizedBox(height: 12),
-
-                       TextField(
-                        style: const TextStyle(
-                          color:Colors.white,
-                        ),
+                      TextField(
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
                           controller: nameController,
                           decoration: InputDecoration(
                               labelText: "Company Name",
@@ -755,44 +752,45 @@ bool isNameEmpty=true;
                                 color: Colors.white,
                               ),
                               border: OutlineInputBorder(),
-                              errorText: isNameEmpty ? null : "Please enter a company name in order to continue.",
+                              errorText: isNameEmpty
+                                  ? null
+                                  : "Please enter a company name in order to continue.",
                               errorStyle: TextStyle(color: Colors.white),
-          focusedErrorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-          errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white))
-                            )),
-                              
+                              focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white)),
+                              errorBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white)))),
                     ],
                   ),
-                  
                 ),
-                SizedBox(height:9),
+                SizedBox(height: 9),
                 Container(
-                    
+
                     //padding: EdgeInsets.top(5),
                     alignment: Alignment.center,
-                    child: Column(mainAxisAlignment: MainAxisAlignment.center, 
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      
-                      ElevatedButton(
-                        
-                        onPressed: () {
-                          _findIndicatorVals();
-                        },
-                        child: const Text('Find Indicator Values',
-                            style: TextStyle(
-                              color: Color(0xff11221d),
-                            )),
-                      ),
-                      // SizedBox(width:10),
-                      // !finding ? Text(
-                      //       "Please Wait...",
-                      //       style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontSize: 16,
-                      //       ),
-                      //     ) : const Text(""),
-                    ])),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          ElevatedButton(
+                            onPressed: () {
+                              _findIndicatorVals();
+                            },
+                            child: const Text('Find Indicator Values',
+                                style: TextStyle(
+                                  color: Color(0xff11221d),
+                                )),
+                          ),
+                          // SizedBox(width:10),
+                          // !finding ? Text(
+                          //       "Please Wait...",
+                          //       style: TextStyle(
+                          //         color: Colors.white,
+                          //         fontSize: 16,
+                          //       ),
+                          //     ) : const Text(""),
+                        ])),
                 SizedBox(height: 17),
                 Container(
                   padding: EdgeInsets.all(16),
@@ -816,7 +814,6 @@ bool isNameEmpty=true;
                         ),
                       ),
                       SizedBox(height: 10),
-                     
                       inputField(
                           "Total Water Withdrawal",
                           "Cubic Meters",
