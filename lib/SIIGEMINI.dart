@@ -134,15 +134,15 @@ class SIIGEMINI extends StatelessWidget {
                         alignment: Alignment.center,
                         child: GestureDetector(
                           onTap: () {
-                            // Navigator.pushReplacement(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => SIILandingPage(
-                            //       title: 'Sustainability Interval Index',
-                            //     ),
-                            //   ),
-                            // );
-                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SIILandingPage(
+                                  title: 'Sustainability Interval Index',
+                                ),
+                              ),
+                            );
+                            // Navigator.pop(context);
                           },
                           child: Container(
                             width: 200,

@@ -173,29 +173,30 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 5),
-              SizedBox(height: 30),
+              SizedBox(height: 10),
+              SizedBox(height: 20),
               Center(
                 child: Column(
                   children: [
                     OutlinedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => HomePage()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SIILandingPage(title: 'Sustainability Interval Index')),
+                        );
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: Color(0xFF62ffac)),
-                        minimumSize: Size(200, 50),
+                        minimumSize: Size(250, 60),
                         padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
                       ),
                       child: Text(
                         'Sustainability Calculator',
-                        style: TextStyle(color: Color(0xFF62ffac)),
+                        style: TextStyle(color: Color(0xFF62ffac), 
+                        fontSize: 20)
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     OutlinedButton(
                       onPressed: () {
                        Navigator.push(
@@ -205,16 +206,15 @@ class HomePage extends StatelessWidget {
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: Color(0xFF62ffac)),
-                        minimumSize: Size(200, 50),
+                        minimumSize: Size(250, 60),
                         padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
                       ),
                       child: Text(
                         'Gemini Index Generator',
-                        style: TextStyle(color: Color(0xFF62ffac)),
+                        style: TextStyle(color: Color(0xFF62ffac), 
+                        fontSize: 20)
                       ),
                     ),
-                    SizedBox(height: 20),
-                    SizedBox(height: 20),
                   ],
                 ),
               ),
