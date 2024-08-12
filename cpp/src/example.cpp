@@ -10,6 +10,7 @@
 #include <vector>
 #include <map>
 #include <sstream>
+#include <tuple>
 
 #define LOG_TAG "ExampleFunction"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -571,12 +572,14 @@ void nestedLoops(int length){
 }
 
 
-extern "C" int real() {
-
+extern "C" int real(double* array) {
+  auto vals = correctInputs(array);
+  string bival = get<0>(vals);
+  string actval = get<1>(vals);
 
   std::stringstream myfile1(BIbreaksConst);
-  std::stringstream myfile2(BIlist.back());
-  std::stringstream myfile3(ActualIntsConst);
+  std::stringstream myfile2(bival);
+  std::stringstream myfile3(actval);
 //   ifstream myfile1("cpp\\src\\ActualInts.txt");
 //   ifstream myfile2("cpp\\src\\BIints.txt");
 //   ifstream myfile3("cpp\\src\\ActualInts.txt");
@@ -738,7 +741,7 @@ extern "C" int real() {
 
 }
 
-extern "C" void correctInputs(double* array){
+tuple<string, string> correctInputs(double* array){
   BIintsConst = "";
   ActualIntsConst ="";
 
@@ -765,6 +768,8 @@ extern "C" void correctInputs(double* array){
   
   LOGI("PRINTING BILISTBACK");
   LOGI("%s", BIlist.back().c_str());
+
+  return make_tuple(BIintsConst, ActualIntsConst);
 
   // LOGI("Printing ARRAY");
   // for (int i = 0; i < 32; i++) {
